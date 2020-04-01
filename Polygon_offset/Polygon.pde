@@ -1,6 +1,6 @@
 class Polygon{
   PVector[] vertices;
-  PVector[] dir;//normalized direction
+  PVector[] normal;
   int n;
   
   Polygon(float[] x, float[] y){
@@ -12,23 +12,23 @@ class Polygon{
   }
   
   void offset(float thickness){
-    calcDir();
-    int u = 0;
-    for(int i = n; i--!=0;){
-      float k = thickness/(dir[u].x*dir[i].y - dir[i].x*dir[u].y);
-      float x = (dir[u].x - dir[i].x)*k + vertices[i].x;
-      float y = (dir[u].y - dir[i].y)*k + vertices[i].y;
-      vertices[i] = new PVector(x, y);
+    calcNormal();
+    int u = n-1;
+    for(int i = 0; i < n; i++){
+      PVector na = normal[u];PVector nb = normal[i];
+      PVector bis = PVector.add(na, nb).normalize();
+      float l = thickness*sqrt(2) / sqrt(1 + PVector.dot(na, nb));
+      vertices[u].add(PVector.mult(bis, l));
       u = i;
     }
   }
   
-  void calcDir(){
+  void calcNormal(){
     int u = n-1;
-    dir = new PVector[n];
+    normal = new PVector[n];
     for(int i = 0; i < n; i++){
-      PVector ndir = PVector.sub(vertices[u], vertices[i]).normalize();
-      dir[i] = ndir;
+      PVector ndir = PVector.sub(vertices[i], vertices[u]).normalize();
+      normal[i] = new PVector(ndir.y, -ndir.x);
       u = i;
     }
   }
