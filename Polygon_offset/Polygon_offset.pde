@@ -1,11 +1,11 @@
 float scale = 500;
-float thickness = -0.33;
+float thickness = -0.25;
 //example of complex shape
 //float[] x = {0.1, 0.9, 0.6, 0.9, 0.5, 0.1, 0.2};
 //float[] y = {0.1, 0.1, 0.5, 0.9, 0.7, 0.9, 0.5};
 //example of convex hull
 float[] x = {0.2, 0.8, 0.9, 0.8, 0.5, 0.2, 0.1};
-float[] y = {0.2, 0.1, 0.5, 0.8, 0.9, 0.8, 0.5};
+float[] y = {0.4, 0.1, 0.4, 0.8, 0.9, 0.8, 0.5};
 //float[] x = {0.1, 0.1, 0.9, 0.9};
 //float[] y = {0.1, 0.9, 0.9, 0.1};
 //float[] x = {1.7,2,1.9,1.63,1.44,1.62,1.22,1.16,0.84,0.78,0.38,0.56,0.37,0.1,0,0.3,0.37,0.1,0.38,0.56,0.84,0.78,1.22,1.16,1.44,1.62,1.9,1.63};
@@ -18,11 +18,10 @@ void setup(){
 void draw(){
   background(255);
   thickness = map(mouseX, 0, width, -0.5, 0.5);
-  Polygon polygon = new Polygon(x, y);
+  Polygon polygon = new Polygon(x, y);//!
+  polygon.offset(thickness, true);
   polygon.show();
   //println(polygon.isClockwise());
-  polygon.offset(thickness);
-  fill(255, 0, 0, 100);
-  polygon.show();
-  println(polygon.isValidCo());//we can use for only convex hull
+ println(thickness);
+  //noLoop();
 }
