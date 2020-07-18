@@ -2,8 +2,8 @@ ArrayList<PVector> ps = new ArrayList<PVector>();
 boolean debug = true;
 
 void setup(){
-  fullScreen();
-  
+  //fullScreen();
+  size(1000, 1000);
   strokeJoin(ROUND);
 }
 
@@ -43,7 +43,7 @@ void draw(){
     }
   }
   fill(0);
-  textSize(100);
+  textSize(50);
   text("Gauss theorem:"+sumS1, 0, 100);
   if(debug) text("Heron's formula:"+sumS2, 0, 200);
 }
